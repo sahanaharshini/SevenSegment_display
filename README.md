@@ -23,42 +23,44 @@ Close the Simulation Once done, by going to Simulation → "Close Simulation
 Input/Output Signal Diagram:
 
 RTL Code:
+```
   module seven_segment(bcd,seg);
     input  [3:0] bcd;       
     output reg [6:0] seg ;     
-always @(bcd)
-begin
-case(bcd)
-        4'b0000: seg = 7'b0111111; 
-        4'b0001: seg = 7'b0000110; 
-        4'b0010: seg = 7'b1011011; 
-        4'b0011: seg = 7'b1001111; 
-        4'b0100: seg = 7'b1100110; 
-        4'b0101: seg = 7'b1101101; 
-        4'b0110: seg = 7'b1111101; 
-        4'b0111: seg = 7'b0000111; 
-        4'b1000: seg = 7'b1111111; 
-        4'b1001: seg = 7'b1100111; 
-        default: seg = 7'b0000000; 
-    endcase
-end
-endmodule
-
+  always @(bcd)
+  begin
+  case(bcd)
+          4'b0000: seg = 7'b0111111; 
+          4'b0001: seg = 7'b0000110; 
+          4'b0010: seg = 7'b1011011; 
+          4'b0011: seg = 7'b1001111; 
+          4'b0100: seg = 7'b1100110; 
+          4'b0101: seg = 7'b1101101; 
+          4'b0110: seg = 7'b1111101; 
+          4'b0111: seg = 7'b0000111; 
+          4'b1000: seg = 7'b1111111; 
+          4'b1001: seg = 7'b1100111; 
+          default: seg = 7'b0000000; 
+  endcase
+  end
+  endmodule
+```
 TestBench:
+```
   module segg7_tb;
-reg [3:0]bcd_t;
-wire [6:0]seg_t;
-seven_segment dut(.bcd(bcd_t), .seg(seg_t));
-initial
-begin
-bcd_t=4'b0000;
-#100
-bcd_t=4'b1000;
-#100
-bcd_t=4'b0011;
-end
-endmodule
-
+  reg [3:0]bcd_t;
+  wire [6:0]seg_t;
+  seven_segment dut(.bcd(bcd_t), .seg(seg_t));
+  initial
+  begin
+  bcd_t=4'b0000;
+  #100
+  bcd_t=4'b1000;
+  #100
+  bcd_t=4'b0011;
+  end
+  endmodule
+```
 Output waveform:
   <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/b457c11f-d2ad-4bb8-b1bf-f3e72e097a9c" />
 
